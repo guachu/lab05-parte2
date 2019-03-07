@@ -59,4 +59,5 @@ public interface CinemaPersitence {
     
     public void CreateFunctionInCinema(String Cinema, CinemaFunction funcion) throws CinemaPersistenceException;
     
+    public void UpdateFunctionInCinema(String Cinema, CinemaFunction funcion) throws CinemaPersistenceException;
 }

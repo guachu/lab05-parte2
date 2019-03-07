@@ -103,11 +103,11 @@ public class CinemaAPIController {
 	}
         
     @RequestMapping(value = "/{name}", method = RequestMethod.PUT, consumes = "application/json")
-	public ResponseEntity<CinemaFunction> manejadorPutFuntion( @PathVariable String name,@RequestBody CinemaFunction funcion) {
+	public ResponseEntity<CinemaFunction> manejadorPutFuntion( @PathVariable String name,@RequestBody CinemaFunction funcion) throws CinemaPersistenceException {
             try {
-                cs.getCinemaByName(name).getFunctions().add(funcion);
+                cs.UpdateFuncionInCinema(name, funcion);
                 return new ResponseEntity<>(HttpStatus.CREATED);
-            } catch (CinemaException e) {
+            } catch (CinemaPersistenceException e) {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }		
 	}    

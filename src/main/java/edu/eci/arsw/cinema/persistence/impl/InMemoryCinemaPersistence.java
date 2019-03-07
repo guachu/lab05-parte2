@@ -130,6 +130,28 @@ public class InMemoryCinemaPersistence implements CinemaPersitence{
             throw new CinemaPersistenceException("Lo sentimos, el cinema "+ Cinema + " no exciste." );
         }
     }
+
+    @Override
+    public void UpdateFunctionInCinema(String Cinema, CinemaFunction funcion) throws CinemaPersistenceException {
+        try {
+            boolean bandera = false;
+            Cinema cine = getCinema(Cinema);
+            List<CinemaFunction> funciones = cine.getFunctions();
+            for (CinemaFunction i : funciones){
+                if(i.getMovie().getName().equals(funcion.getMovie().getName())){
+                    bandera = true;
+                    i = funcion;
+                }
+            }
+            if(!bandera){
+                funciones.add(funcion);
+                cine.setSchedule(funciones);
+            }
+            
+        } catch (CinemaPersistenceException ex) {
+            throw new CinemaPersistenceException("Lo sentimos, el cinema "+ Cinema + " no exciste." );
+        }
+    }
     
     
 

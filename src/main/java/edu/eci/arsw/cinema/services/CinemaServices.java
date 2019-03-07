@@ -81,4 +81,8 @@ public class CinemaServices {
         cps.CreateFunctionInCinema(Cinema, funcion);
     }
 
+    
+    public void UpdateFuncionInCinema(String Cinema, CinemaFunction funcion) throws CinemaPersistenceException{
+        cps.UpdateFunctionInCinema(Cinema, funcion);
+    }
 }
