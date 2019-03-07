@@ -76,5 +76,9 @@ public class CinemaServices {
         return listaN;
     }
     
+    
+    public void CreateFuncionInCinema(String Cinema, CinemaFunction funcion) throws CinemaPersistenceException{
+        cps.CreateFunctionInCinema(Cinema, funcion);
+    }
 
 }

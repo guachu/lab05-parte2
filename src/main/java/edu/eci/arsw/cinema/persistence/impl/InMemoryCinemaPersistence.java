@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import jdk.nashorn.internal.objects.NativeArray;
 import org.springframework.stereotype.Service;
 import sun.security.pkcs11.wrapper.Functions;
@@ -115,6 +117,18 @@ public class InMemoryCinemaPersistence implements CinemaPersitence{
     public List<CinemaFunction> getFunctionsbyCinema(String cinema) {
         Cinema cine = cinemas.get(cinema);
         return cine.getFunctions();
+    }
+
+    @Override
+    public void CreateFunctionInCinema(String Cinema, CinemaFunction funcion) throws CinemaPersistenceException{
+        try {
+            Cinema cine = getCinema(Cinema);
+            List<CinemaFunction> funciones = cine.getFunctions();
+            funciones.add(funcion);
+            cine.setSchedule(funciones);
+        } catch (CinemaPersistenceException ex) {
+            throw new CinemaPersistenceException("Lo sentimos, el cinema "+ Cinema + " no exciste." );
+        }
     }
     
     

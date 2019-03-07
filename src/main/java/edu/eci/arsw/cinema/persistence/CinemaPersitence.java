@@ -56,4 +56,7 @@ public interface CinemaPersitence {
     public Map<String,Cinema> getCinemas();
     
     public List<CinemaFunction> getFunctionsbyCinema(String cinema);
+    
+    public void CreateFunctionInCinema(String Cinema, CinemaFunction funcion) throws CinemaPersistenceException;
+    
 }
