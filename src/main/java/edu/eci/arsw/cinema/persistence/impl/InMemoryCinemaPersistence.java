@@ -96,8 +96,14 @@ public class InMemoryCinemaPersistence implements CinemaPersitence{
     }
 
     @Override
-    public Cinema getCinema(String name) throws CinemaPersistenceException {
-        return cinemas.get(name);
+    public Cinema getCinema(String name) throws CinemaPersistenceException {      
+        if (cinemas.containsKey(name)) {
+            return cinemas.get(name);
+        }else{
+            throw new CinemaPersistenceException("Lo sentimos, el cinema "+ name + " no exciste." );
+        }
+            
+
     }
 
     @Override

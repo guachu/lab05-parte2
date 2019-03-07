@@ -43,7 +43,7 @@ public class CinemaServices {
      * 
      * @param name cinema's name
      * @return the cinema of the given name created by the given author
-     * @throws CinemaException
+     * @throws edu.eci.arsw.cinema.persistence.CinemaException
      */
     public Cinema getCinemaByName(String name) throws CinemaException{
         try{
@@ -51,7 +51,7 @@ public class CinemaServices {
             return cinemaN;
         }
         catch(CinemaPersistenceException e){
-            throw new CinemaException("No se a podido encontrar esta pelicula");
+            throw new CinemaException(e.getMessage());
         } 
     }
     
@@ -67,9 +67,7 @@ public class CinemaServices {
     }
     
     public List<CinemaFunction> getFunctionsbyCinemaAndDate(String cinema, String date) {
-        List<CinemaFunction> listaN= new ArrayList<>();
-        listaN = cps.getFunctionsbyCinemaAndDate(cinema, date);
-        return listaN;
+            return cps.getFunctionsbyCinemaAndDate(cinema, date);
     }
 
     public List<CinemaFunction> getFunctionsbyCinema(String cinema) {
