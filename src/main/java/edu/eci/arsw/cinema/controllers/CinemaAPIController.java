@@ -89,8 +89,11 @@ public class CinemaAPIController {
         }
     }
     
-    @PostMapping(value = "cinemas/{name}")
-	public ResponseEntity<CinemaFunction> manejadorPostFuntion( @PathVariable ("name") String name,@RequestBody CinemaFunction funcion) {
+    
+    //curl -i -X POST -H "Content-Type:application/json" -HAccept:application/json http://localhost:8080/cinemas/cinemaX -d '{"movie":{"name":"Pelicula del intento","genre":"Action"},"seats":[[true,true,true,true,true,true,true,true,true,true,true,true],[true,true,true,true,true,true,true,true,true,true,true,true],[true,true,true,true,true,true,true,true,true,true,true,true],[true,true,true,true,true,true,true,true,true,true,true,true],[true,true,true,true,true,true,true,true,true,true,true,true],[true,true,true,true,true,true,true,true,true,true,true,true],[true,true,true,true,true,true,true,true,true,true,true,true]],"date":"2018-12-18 14:30"}'
+
+    @RequestMapping(value = "/{name}", method = RequestMethod.POST, consumes = "application/json")
+	public ResponseEntity<CinemaFunction> manejadorPostFuntion( @PathVariable String name,@RequestBody CinemaFunction funcion) {
             try {
                 cs.getCinemaByName(name).getFunctions().add(funcion);
                 return new ResponseEntity<>(HttpStatus.CREATED);
