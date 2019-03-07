@@ -93,13 +93,23 @@ public class CinemaAPIController {
     //curl -i -X POST -H "Content-Type:application/json" -HAccept:application/json http://localhost:8080/cinemas/cinemaX -d '{"movie":{"name":"Pelicula del intento","genre":"Action"},"seats":[[true,true,true,true,true,true,true,true,true,true,true,true],[true,true,true,true,true,true,true,true,true,true,true,true],[true,true,true,true,true,true,true,true,true,true,true,true],[true,true,true,true,true,true,true,true,true,true,true,true],[true,true,true,true,true,true,true,true,true,true,true,true],[true,true,true,true,true,true,true,true,true,true,true,true],[true,true,true,true,true,true,true,true,true,true,true,true]],"date":"2018-12-18 14:30"}'
 
     @RequestMapping(value = "/{name}", method = RequestMethod.POST, consumes = "application/json")
-	public ResponseEntity<CinemaFunction> manejadorPostFuntion( @PathVariable String name,@RequestBody CinemaFunction funcion) {
+	public ResponseEntity<CinemaFunction> manejadorPostFuntion( @PathVariable String name,@RequestBody CinemaFunction funcion) throws CinemaPersistenceException {
+            try {
+                cs.CreateFuncionInCinema(name, funcion);
+                return new ResponseEntity<>(HttpStatus.CREATED);
+            } catch (CinemaPersistenceException e) {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }		
+	}
+        
+    @RequestMapping(value = "/{name}", method = RequestMethod.PUT, consumes = "application/json")
+	public ResponseEntity<CinemaFunction> manejadorPutFuntion( @PathVariable String name,@RequestBody CinemaFunction funcion) {
             try {
                 cs.getCinemaByName(name).getFunctions().add(funcion);
                 return new ResponseEntity<>(HttpStatus.CREATED);
             } catch (CinemaException e) {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }		
-	}
+	}    
     
 }
